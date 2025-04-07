@@ -97,12 +97,12 @@ class IEEECrawler:
             next(reader)  # 跳过标题
             paper_ids = [row[0] for row in reader]
         
-        with open('paper_metadata.csv', 'a', newline='', encoding='utf-8') as csvfile:
+        with open('IEEE_paper_metadata.csv', 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ['Title', 'Abstract', 'Keywords', 'Links', 'Citation']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             
-            for idx, pid in enumerate(paper_ids, start=224):
+            for idx, pid in enumerate(paper_ids, 1):
                 print(f"正在处理第 {idx}/{len(paper_ids)} 篇论文")
                 if data := self.parse_paper_details(pid):
                     writer.writerow(data)
